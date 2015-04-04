@@ -43,7 +43,7 @@ void addFilesToXproj(std::string projectFileLocation, std::string sourceFilePath
         if (ZoneFileTools::fileBelongsInArea(fileExt, "PBXBuildFile"))
         {
             std::string buildFileSectionHeader = "/* Begin PBXBuildFile section */";
-            std::string buildFileSectionEntry = "		" + UUID1 + " /* " + sourceFileName + " in Sources */ = {isa = PBXBuildFile; fileRef = " + UUID2 + " /* " + sourceFileName + " */; };";
+            std::string buildFileSectionEntry = "		" + UUID1 + " /* " + sourceFileName + " in " + (fileExt=="h"?"Headers":"Sources") + " */ = {isa = PBXBuildFile; fileRef = " + UUID2 + " /* " + sourceFileName + " */; settings = {ATTRIBUTES = (Public, ); }; };";
             transformedProjectContent = ReplaceString(transformedProjectContent, buildFileSectionHeader, buildFileSectionHeader + "\n" + buildFileSectionEntry);
         }
         
@@ -85,6 +85,16 @@ void addFilesToXproj(std::string projectFileLocation, std::string sourceFilePath
             initialPBXResourcesBuildWholeSection = trimPast(initialPBXResourcesBuildWholeSection, ");");
             std::string transformedPBXResourcesBuildWhileSection = initialPBXResourcesBuildWholeSection + "    " + UUID1 + " /* " + sourceFileName + " */,\n";
             transformedProjectContent = ReplaceString(transformedProjectContent, initialPBXResourcesBuildWholeSection, transformedPBXResourcesBuildWhileSection);
+        }
+                
+        //PBXHeadersBuildPhase section
+        if (ZoneFileTools::fileBelongsInArea(fileExt, "PBXHeadersBuildPhase"))
+        {
+            const std::string PBXHeadersBuildHeader="/* Begin PBXHeadersBuildPhase section */";
+            std::string initialPBXHeadersBuildWholeSection = trimBefore(transformedProjectContent, PBXHeadersBuildHeader);
+            initialPBXHeadersBuildWholeSection = trimPast(initialPBXHeadersBuildWholeSection, ");");
+            std::string transformedPBXHeadersBuildWhileSection = initialPBXHeadersBuildWholeSection + "    " + UUID1 + " /* " + sourceFileName + " */,\n";
+            transformedProjectContent = ReplaceString(transformedProjectContent, initialPBXHeadersBuildWholeSection, transformedPBXHeadersBuildWhileSection);
         }
     }
     

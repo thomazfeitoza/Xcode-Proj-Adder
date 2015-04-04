@@ -58,7 +58,7 @@ string ZoneFileTools::getIdentifierForFileExtention(string fileExtention)
 {
     if(areaID == "PBXBuildFile")
     {
-        vector<string> eligibleFileTypes {supportedFileTypes[0], supportedFileTypes[2], supportedFileTypes[3], supportedFileTypes[4], supportedFileTypes[5],supportedFileTypes[6],supportedFileTypes[7],supportedFileTypes[8],supportedFileTypes[9],supportedFileTypes[10],supportedFileTypes[12]};
+        vector<string> eligibleFileTypes {supportedFileTypes[0], supportedFileTypes[1], supportedFileTypes[2], supportedFileTypes[3], supportedFileTypes[4], supportedFileTypes[5],supportedFileTypes[6],supportedFileTypes[7],supportedFileTypes[8],supportedFileTypes[9],supportedFileTypes[10],supportedFileTypes[12]};
         return ZoneFileTools::in_array(fileExtension, eligibleFileTypes);
     }
     else if(areaID == "PBXSourcesBuildPhase")
@@ -79,6 +79,11 @@ string ZoneFileTools::getIdentifierForFileExtention(string fileExtention)
     else if(areaID == "PBXResourcesBuildPhase")
     {
         vector<string> eligibleFileTypes {supportedFileTypes[2], supportedFileTypes[3],supportedFileTypes[6],supportedFileTypes[7],supportedFileTypes[8],supportedFileTypes[10]};
+        return ZoneFileTools::in_array(fileExtension, eligibleFileTypes);
+    }
+    else if(areaID == "PBXHeadersBuildPhase")
+    {
+        vector<string> eligibleFileTypes {supportedFileTypes[1]};
         return ZoneFileTools::in_array(fileExtension, eligibleFileTypes);
     }
     

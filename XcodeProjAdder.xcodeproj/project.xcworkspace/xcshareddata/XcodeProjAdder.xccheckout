@@ -14,7 +14,7 @@
 		<string>https://github.com/zackslash/Xcode-Proj-Adder.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>XcodeProjAdder.xcodeproj/project.xcworkspace</string>
+	<string>XcodeProjAdder.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0FDD656733D5B0D52E92EA04E779D4A82A0CED51</key>
